@@ -1,0 +1,28 @@
+{
+  "name": "oobe-ace-agent",
+  "version": "1.0.0",
+  "description": "Autonomous Data Intelligence Agent — OOBE Synapse × Ace Data Cloud",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/agent.js",
+    "register": "node dist/src/register.js",
+    "demo": "node dist/src/demo.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.80",
+    "@oobe-protocol-labs/synapse-client-sdk": "^2.0.6",
+    "@solana/web3.js": "^1.98.0",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
