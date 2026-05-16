@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Nexus — Autonomous Data Intelligence Agent | OOBE × Ace Data Cloud</title>
+<meta name="description" content="Autonomous agent for the OOBE × Ace Data Cloud bounty. Synapse Agent Protocol, 3 Ace Data Cloud services, x402 payments on Solana.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #222232;
+    --text: #e8e8f0;
+    --muted: #8888a0;
+    --purple: #8b5cf6;
+    --purple-glow: rgba(139,92,246,0.25);
+    --cyan: #06b6d4;
+    --cyan-glow: rgba(6,182,212,0.25);
+    --green: #10b981;
+    --green-glow: rgba(16,185,129,0.25);
+    --orange: #f59e0b;
+    --orange-glow: rgba(245,158,11,0.25);
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .font-display { font-family: 'Rubik', system-ui, sans-serif; }
+
+  /* Hero */
+  .hero-gradient {
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(139,92,246,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(6,182,212,0.1) 0%, transparent 70%);
+  }
+
+  /* Glass card */
+  .glass {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+  }
+  .glass:hover {
+    border-color: var(--purple);
+    box-shadow: 0 0 30px var(--purple-glow);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Flow animation */
+  @keyframes flowDown {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .flow-line {
+    animation: flowDown 2s ease-in-out infinite;
+  }
+  .flow-line:nth-child(2) { animation-delay: 0.6s; }
+  .flow-line:nth-child(3) { animation-delay: 1.2s; }
+  .pulse-dot { animation: pulse 2s ease-in-out infinite; }
+
+  /* Step number */
+  .step-num {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  /* Checkmark */
+  .check { color: var(--green); font-weight: bold; }
+
+  /* Section */
+  section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+
+  /* Button */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 12px;
+    font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.2s ease; border: none; font-size: 15px;
+  }
+  .btn-primary {
+    background: var(--purple); color: white;
+    box-shadow: 0 0 20px var(--purple-glow);
+  }
+  .btn-primary:hover { background: #7c3aed; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--purple); background: rgba(139,92,246,0.05); }
+
+  /* Status badge */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--green);
+  }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+  /* Service cards */
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+
+  /* Code block */
+  pre.code-block {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c9d1d9;
+  }
+  .code-block .kw { color: #ff79c6; }
+  .code-block .str { color: #a5d6ff; }
+  .code-block .fn { color: #50fa7b; }
+  .code-block .cmt { color: #6272a4; }
+
+  @media (max-width: 768px) {
+    section { padding: 48px 16px; }
+    .hero-title { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero-gradient" style="min-height: 90vh; display: flex; align-items: center; padding-top: 60px;">
+  <div style="width: 100%;">
+    <div style="max-width: 700px;">
+      <div class="badge" style="margin-bottom: 20px;">
+        <span class="dot"></span> Bounty Submission — $2,400 USDC
+      </div>
+      <h1 class="font-display" style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1.05; margin: 0 0 20px 0;">
+        Autonomous<br><span class="gradient-text">Data Intelligence</span><br>Agent
+      </h1>
+      <p style="font-size: 1.15rem; color: var(--muted); margin: 0 0 32px 0; max-width: 560px;">
+        Built on OOBE Synapse Agent Protocol. Discovers tools autonomously,
+        executes intelligence workflows across 3 Ace Data Cloud services,
+        pays via x402 (Solana USDC).
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="btn btn-primary" target="_blank">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#architecture" class="btn btn-outline">Architecture →</a>
+        <a href="#demo" class="btn btn-outline">Live Demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Status Bar -->
+<section style="padding: 0 24px 80px;">
+  <div class="glass" style="display: flex; gap: 32px; padding: 20px 32px; justify-content: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
+    <div style="text-align: center;">
+      <div class="font-display" style="font-size: 1.8rem; font-weight: 700; color: var(--purple);">3</div>
+      <div style="font-size: 13px; color: var(--muted);">Ace Data Cloud Services</div>
+    </div>
+    <div style="text-align: center;">
+      <div class="font-display" style="font-size: 1.8rem; font-weight: 700; color: var(--cyan);">~$0.008</div>
+      <div style="font-size: 13px; color: var(--muted);">USDC per run (x402)</div>
+    </div>
+    <div style="text-align: center;">
+      <div class="font-display" style="font-size: 1.8rem; font-weight: 700; color: var(--green);">100%</div>
+      <div style="font-size: 13px; color: var(--muted);">Python — No Node.js</div>
+    </div>
+    <div style="text-align: center;">
+      <div class="font-display" style="font-size: 1.8rem; font-weight: 700; color: var(--orange);">7</div>
+      <div style="font-size: 13px; color: var(--muted);">Modular Components</div>
+    </div>
+  </div>
+</section>
+
+<!-- Architecture -->
+<section id="architecture">
+  <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; margin: 0 0 12px 0;">
+    <span class="gradient-text">Architecture</span>
+  </h2>
+  <p style="color: var(--muted); margin: 0 0 48px 0; font-size: 1.05rem;">
+    Clean, modular design. Each component has a single responsibility.
+    Full Python stack with Solana x402 micropayments.
+  </p>
+
+  <!-- Architecture diagram rendered as styled HTML -->
+  <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; margin-bottom: 48px;">
+    <!-- Orchestrator -->
+    <div class="glass" style="padding: 16px 40px; text-align: center; min-width: 280px;">
+      <div class="font-display" style="font-weight: 700; font-size: 1.1rem;">AtlasNexusAgent</div>
+      <div style="font-size: 12px; color: var(--muted);">Orchestrator</div>
+    </div>
+
+    <div style="color: var(--purple); font-size: 20px;">│</div>
+
+    <!-- 3 columns -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 700px; width: 100%;">
+      <div class="glass" style="padding: 16px; text-align: center;">
+        <div class="service-icon" style="background: rgba(139,92,246,0.1); margin: 0 auto 8px;">🔗</div>
+        <div class="font-display" style="font-weight: 600; font-size: 0.9rem;">SAP Client</div>
+        <div style="font-size: 12px; color: var(--muted);">Synapse Protocol</div>
+      </div>
+      <div class="glass" style="padding: 16px; text-align: center;">
+        <div class="service-icon" style="background: rgba(6,182,212,0.1); margin: 0 auto 8px;">☁️</div>
+        <div class="font-display" style="font-weight: 600; font-size: 0.9rem;">Ace Services</div>
+        <div style="font-size: 12px; color: var(--muted);">Search · Chat · Images</div>
+      </div>
+      <div class="glass" style="padding: 16px; text-align: center;">
+        <div class="service-icon" style="background: rgba(16,185,129,0.1); margin: 0 auto 8px;">💰</div>
+        <div class="font-display" style="font-weight: 600; font-size: 0.9rem;">x402 Handler</div>
+        <div style="font-size: 12px; color: var(--muted);">Solana USDC</div>
+      </div>
+    </div>
+
+    <div style="color: var(--purple); font-size: 20px;">│</div>
+
+    <!-- Engine -->
+    <div class="glass" style="padding: 16px 40px; text-align: center; min-width: 280px; border-color: var(--cyan);">
+      <div class="font-display" style="font-weight: 700; font-size: 1.1rem;">Intelligence Engine</div>
+      <div style="font-size: 12px; color: var(--muted);">Search → Analyze → Visualize</div>
+    </div>
+
+    <div style="color: var(--purple); font-size: 20px;">│</div>
+
+    <!-- Output -->
+    <div class="glass" style="padding: 16px 40px; text-align: center; min-width: 280px; border-color: var(--green);">
+      <div class="font-display" style="font-weight: 700; font-size: 1.1rem;">Report Generator</div>
+      <div style="font-size: 12px; color: var(--muted);">Markdown · Audit Trail</div>
+    </div>
+  </div>
+
+  <!-- Component table -->
+  <div style="display: grid; gap: 12px; max-width: 800px;">
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--purple);">agent.py</div>
+      <div>Orchestrator + CLI entry point. Manages agent lifecycle: register → discover → execute → report → audit.</div>
+    </div>
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--purple);">sap.py</div>
+      <div>Synapse Agent Protocol integration. Agent registration on-chain, tool discovery, activity logging.</div>
+    </div>
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--cyan);">ace_services.py</div>
+      <div>3 Ace Data Cloud service wrappers: Search, Chat (GPT-4o-mini), Images (AI visualization). Usage tracking & cost estimation.</div>
+    </div>
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--green);">x402_payments.py</div>
+      <div>x402 payment handler. Solana USDC micropayments via signed transactions. Payment tracker with full audit trail.</div>
+    </div>
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--cyan);">intelligence_engine.py</div>
+      <div>Workflow engine — orchestrates Search → Analyze → Visualize pipeline. Clean architecture, zero external dependencies.</div>
+    </div>
+    <div class="glass" style="display: grid; grid-template-columns: 180px 1fr; padding: 16px 20px; align-items: start;">
+      <div class="font-display" style="font-weight: 700; color: var(--green);">report_generator.py</div>
+      <div>Markdown intelligence briefs with full audit trail. Demo script generator for bounty compliance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Workflow -->
+<section id="workflow">
+  <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; margin: 0 0 12px 0;">
+    <span class="gradient-text">Autonomous Workflow</span>
+  </h2>
+  <p style="color: var(--muted); margin: 0 0 48px 0; font-size: 1.05rem;">
+    From natural language query to intelligence report — fully autonomous, no manual steps.
+  </p>
+
+  <div style="display: flex; flex-direction: column; gap: 0; max-width: 700px; margin: 0 auto;">
+    <!-- Step 1 -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;">
+        <span class="step-num">1</span>
+      </div>
+      <div class="glass" style="flex: 1; padding: 20px 24px; position: relative;">
+        <div class="font-display" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Agent Registration</div>
+        <div style="color: var(--muted); font-size: 14px;">Register on Synapse Agent Protocol. Declare capabilities: search, analysis, visualization.</div>
+        <div style="margin-top: 8px; display: flex; gap: 8px;">
+          <span style="background: rgba(139,92,246,0.15); color: var(--purple); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">SAP Mainnet</span>
+          <span style="background: rgba(6,182,212,0.15); color: var(--cyan); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">On-chain</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connector -->
+    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+
+    <!-- Step 2 -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;"><span class="step-num">2</span></div>
+      <div class="glass" style="flex: 1; padding: 20px 24px;">
+        <div class="font-display" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Tool Discovery</div>
+        <div style="color: var(--muted); font-size: 14px;">Discover available Ace Data Cloud services through SAP. Select tools based on query needs.</div>
+        <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: rgba(139,92,246,0.15); color: var(--purple); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">acedatacloud-search</span>
+          <span style="background: rgba(139,92,246,0.15); color: var(--purple); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">acedatacloud-chat</span>
+          <span style="background: rgba(139,92,246,0.15); color: var(--purple); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">acedatacloud-images</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connector -->
+    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+
+    <!-- Step 3 -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;"><span class="step-num">3</span></div>
+      <div class="glass" style="flex: 1; padding: 20px 24px;">
+        <div class="font-display" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Data Collection — Ace Data Cloud Search</div>
+        <div style="color: var(--muted); font-size: 14px;">Real-time web search for crypto market data, trends, and analysis. Payment via x402.</div>
+        <div style="margin-top: 8px; display: flex; gap: 8px;">
+          <span style="background: rgba(16,185,129,0.15); color: var(--green); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">~$0.001 USDC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connector -->
+    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+
+    <!-- Step 4 -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;"><span class="step-num">4</span></div>
+      <div class="glass" style="flex: 1; padding: 20px 24px;">
+        <div class="font-display" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">AI Analysis — Ace Data Cloud Chat</div>
+        <div style="color: var(--muted); font-size: 14px;">GPT-4o-mini powered analysis: trends, sentiment, actionable insights. Payment via x402.</div>
+        <div style="margin-top: 8px; display: flex; gap: 8px;">
+          <span style="background: rgba(16,185,129,0.15); color: var(--green); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">~$0.002 USDC</span>
+          <span style="background: rgba(6,182,212,0.15); color: var(--cyan); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">GPT-4o-mini</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connector -->
+    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+
+    <!-- Step 5 -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;"><span class="step-num">5</span></div>
+      <div class="glass" style="flex: 1; padding: 20px 24px;">
+        <div class="font-display" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Intelligence Report</div>
+        <div style="color: var(--muted); font-size: 14px;">Markdown brief with full execution audit trail, payment reconciliation, and service usage log.</div>
+        <div style="margin-top: 8px; display: flex; gap: 8px;">
+          <span style="background: rgba(16,185,129,0.15); color: var(--green); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Audit Ready</span>
+          <span style="background: rgba(6,182,212,0.15); color: var(--cyan); padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Markdown</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- x402 Payment Flow -->
+<section id="payments">
+  <h2 class="font-display" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin: 0 0 12px 0;">
+    <span class="gradient-text">x402 Payment Protocol</span>
+  </h2>
+  <p style="color: var(--muted); margin: 0 0 48px 0; font-size: 1.05rem;">
+    Pay-per-request with Solana USDC. No API keys, no subscriptions, no accounts.
+  </p>
+
+  <pre class="code-block" style="max-width: 700px; margin: 0 auto;">
+<span class="cmt"># Autonomous agent pays for each API call via x402</span>
+<span class="kw">from</span> acedatacloud <span class="kw">import</span> AceDataCloud
+<span class="kw">from</span> acedatacloud_x402 <span class="kw">import</span> create_x402_payment_handler, SolanaKeypairSigner
+
+signer = SolanaKeypairSigner.from_base58(<span class="str">"your-solana-key"</span>)
+handler = create_x402_payment_handler(
+    network=<span class="str">"solana"</span>,
+    solana_signer=signer,
+)
+
+client = AceDataCloud(payment_handler=handler)
+
+<span class="cmt"># Every call automatically pays via x402</span>
+result = client.search.create(query=<span class="str">"Solana DeFi trends"</span>)    <span class="cmt"># $0.001 USDC</span>
+analysis = client.chat.completions.create(...)               <span class="cmt"># $0.002 USDC</span>
+image = client.images.generate(...)                           <span class="cmt"># $0.005 USDC</span></pre>
+
+  <div style="text-align: center; margin-top: 32px;">
+    <div style="display: inline-flex; gap: 24px; text-align: center;">
+      <div>
+        <div class="font-display" style="font-weight: 700; color: var(--green);">~$0.008</div>
+        <div style="font-size: 13px; color: var(--muted);">per full intelligence run</div>
+      </div>
+      <div style="width: 1px; background: var(--border);"></div>
+      <div>
+        <div class="font-display" style="font-weight: 700; color: var(--cyan);">Solana</div>
+        <div style="font-size: 13px; color: var(--muted);">USDC SPL token</div>
+      </div>
+      <div style="width: 1px; background: var(--border);"></div>
+      <div>
+        <div class="font-display" style="font-weight: 700; color: var(--purple);">0 keys</div>
+        <div style="font-size: 13px; color: var(--muted);">No API keys needed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bounty Compliance -->
+<section id="compliance">
+  <h2 class="font-display" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin: 0 0 12px 0;">
+    <span class="gradient-text">Bounty Compliance</span>
+  </h2>
+  <p style="color: var(--muted); margin: 0 0 48px 0; font-size: 1.05rem;">
+    All requirements checked. Ready for submission review.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; max-width: 900px;">
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">Agent Registered on SAP</div>
+      <div style="font-size: 13px; color: var(--muted);">On-chain registration via Synapse Agent Protocol</div>
+    </div>
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">Automated Workflow</div>
+      <div style="font-size: 13px; color: var(--muted);">Search → Analyze → Report. No manual steps.</div>
+    </div>
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">Ace Data Cloud Account</div>
+      <div style="font-size: 13px; color: var(--muted);">Auto-created via x402 payment flow</div>
+    </div>
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">x402 + Synapse RPC</div>
+      <div style="font-size: 13px; color: var(--muted);">Ace Data Cloud facilitator via Synapse RPC</div>
+    </div>
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">3 Distinct Services</div>
+      <div style="font-size: 13px; color: var(--muted);">Search · Chat (GPT-4o-mini) · Images</div>
+    </div>
+    <div class="glass" style="padding: 20px 24px;">
+      <div class="check" style="font-size: 1.3rem; margin-bottom: 4px;">✅</div>
+      <div class="font-display" style="font-weight: 700;">GitHub Repository</div>
+      <div style="font-size: 13px; color: var(--muted);">AtlasNexusOps/oobe-ace-agent</div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo -->
+<section id="demo">
+  <h2 class="font-display" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin: 0 0 12px 0;">
+    <span class="gradient-text">Live Demo</span>
+  </h2>
+  <p style="color: var(--muted); margin: 0 0 48px 0; font-size: 1.05rem;">
+    Run the agent locally in seconds. One command, full intelligence report.
+  </p>
+
+  <pre class="code-block" style="max-width: 700px; margin: 0 auto 24px;">
+<span class="cmt"># Clone & setup</span>
+git clone https://github.com/AtlasNexusOps/oobe-ace-agent.git
+<span class="kw">cd</span> oobe-ace-agent
+python3 -m venv .venv && <span class="kw">source</span> .venv/bin/activate
+pip install -r requirements.txt
+
+<span class="cmt"># Configure Solana wallet for x402 payments</span>
+<span class="kw">cp</span> .env.example .env  <span class="cmt"># Add SOLANA_PRIVATE_KEY_BASE58</span>
+
+<span class="cmt"># Run intelligence on any topic</span>
+python3 -m src.agent <span class="str">"Bitcoin ETF inflows analysis"</span>
+
+<span class="cmt"># Output: examples/intel-brief-*.md</span></pre>
+
+  <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="btn btn-primary" target="_blank">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://github.com/AtlasNexusOps/oobe-ace-agent/blob/main/docs/demo-script.md" class="btn btn-outline" target="_blank">
+      Demo Walkthrough →
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 14px;">
+  <p>Atlas Nexus — Autonomous Data Intelligence Agent</p>
+  <p style="margin-top: 4px;">Built for the OOBE × Ace Data Cloud Autonomous Agent Bounty</p>
+  <p style="margin-top: 16px; font-size: 12px;">
+    <a href="https://github.com/AtlasNexusOps" style="color: var(--purple); text-decoration: none;">GitHub</a>
+    &nbsp;·&nbsp;
+    <a href="https://atlasnexusops.github.io" style="color: var(--cyan); text-decoration: none;">Portfolio</a>
+  </p>
+</footer>
+
+</body>
+</html>
