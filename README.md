@@ -79,3 +79,7 @@ bash scripts/demo.sh "Bitcoin ETF inflows analysis"
 ## License
 
 MIT — Atlas Nexus (AtlasNexusOps)
+
+## Live Site
+
+🔗 **[atlasnexusops.github.io/oobe-ace-agent](https://atlasnexusops.github.io/oobe-ace-agent/)** — Architecture, workflow, compliance checklist, demo.
