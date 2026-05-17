@@ -2,72 +2,134 @@
 
 **Built for the OOBE × Ace Data Cloud Autonomous Agent Bounty ($2,400 USDC)**
 
-TypeScript/Node.js autonomous agent that:
-- Registers on **Synapse Agent Protocol (SAP)** mainnet
-- Publishes tools on-chain with JSON schemas
-- Executes workflows across **3 Ace Data Cloud services** via Synapse MCP
-- Pays via **x402** micropayments (Solana USDC)
+Autonomous agent that discovers tools through **Synapse Agent Protocol**,
+executes intelligence workflows across **3 Ace Data Cloud services**,
+and pays via **x402** (Solana USDC micropayments).
+
+## Live Site
+
+🔗 **[atlasnexusops.github.io/oobe-ace-agent](https://atlasnexusops.github.io/oobe-ace-agent/)** — Architecture, workflow, compliance, demo.
+
+---
 
 ## Quick Start
 
 ```bash
+# Clone
 git clone https://github.com/AtlasNexusOps/oobe-ace-agent.git
 cd oobe-ace-agent
 
-npm install
+# Setup
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# Configure
 cp .env.example .env
-# Edit .env — fill in OOBE_API_KEY + SOLANA key
+# Edit .env — fill in SOLANA_PRIVATE_KEY_BASE58
 
-# Register agent on SAP + publish tools
-npm run register
+# Run (single query)
+python run_autonomous.py --once --query "Solana DeFi trends"
 
-# Run end-to-end demo
-npm run demo
+# Run (autonomous continuous mode — 30min cycles)
+python run_autonomous.py
 
-# Run intelligence on any topic
-npm start "Bitcoin ETF flows analysis"
+# Run (autonomous + images every 3 cycles)
+python run_autonomous.py --image-every 3
+```
+
+## Modes
+
+### Single Cycle (`--once`)
+```bash
+python run_autonomous.py --once --query "Bitcoin whale accumulation"
+python run_autonomous.py --once --image  # with AI visualization
+```
+
+### Continuous Autonomous (`default`)
+```bash
+python run_autonomous.py                    # 30min interval
+python run_autonomous.py --interval 900     # 15min interval
+python run_autonomous.py --image-every 1    # image every cycle
+```
+
+Press `Ctrl+C` for graceful shutdown — saves state to `examples/agent_state.json`.
+
+## What It Does
+
+```
+┌─ Cycle every N minutes ─────────────────────────────┐
+│                                                       │
+│  1. Select intelligence query (14-topic crypto pool)  │
+│  2. Discover tools via SAP                            │
+│  3. Search → Ace Data Cloud Search  [$0.001 USDC]     │
+│  4. Analyze → Ace Data Cloud Chat   [$0.002 USDC]     │
+│  5. Visualize → Ace Data Cloud Images (every 3rd)     │
+│  6. Log activity on SAP (on-chain audit)              │
+│  7. Generate Markdown intelligence brief              │
+│                                                       │
+└───────────────────────────────────────────────────────┘
 ```
 
 ## Architecture
 
 ```
-AtlasNexusAgent (TypeScript)
-├── SAP Integration    → Agent registration, tool publishing, escrow
-├── Ace Data Cloud     → Search, Chat, Images (via Synapse MCP Bridge)
-├── x402 Payments      → EscrowV2 + settlement via SAP SDK
-├── Workflow Engine    → Search → Analyze → Visualize → Report
-└── Report Generator   → Markdown briefs + audit trail
+AtlasNexusScout (autonomous orchestrator)
+├── SAP Client          → Agent registration, tool discovery, activity log
+├── Ace Services        → Search, Chat, Images (3 distinct services)
+├── x402 Handler        → Solana USDC micropayments (graceful dry-run)
+├── Intelligence Engine → Workflow: Search → Analyze → Visualize
+├── Report Generator    → Markdown briefs + full audit trail
+└── Query Pool          → 14 crypto topics, cooldown-aware selection
 ```
+
+See [docs/architecture.md](docs/architecture.md) for full design.
 
 ## Bounty Compliance
 
 | Requirement | Status |
 |---|---|
-| Agent registered on SAP | ✅ `SapClient.agent.register()` |
-| Complete automated workflow | ✅ Search → Analyze → Visualize → Report |
-| Ace Data Cloud account | ✅ Via x402 auto-creation |
-| x402 + Synapse RPC | ✅ Via `SapClient.escrowV2` |
+| Agent registered on SAP | ✅ |
+| Complete automated workflow | ✅ |
+| Ace Data Cloud account | ✅ (x402 auto) |
+| x402 + Synapse RPC | ✅ |
 | 3+ distinct services | ✅ Search, Chat, Images |
 | GitHub repo | ✅ |
 | Demo on X | ⬜ Pending |
+| **Autonomous continuous execution** | ✅ `run_autonomous.py` |
 
-## Demo
+## Dry-Run Mode
 
-```bash
-npm run demo "Solana DeFi trends"
+If `SOLANA_PRIVATE_KEY_BASE58` is not set, the agent runs in **dry-run mode**:
+- SAP tool discovery uses fallback service list
+- x402 payments are skipped
+- Cycle logging still works
+- Perfect for testing the workflow without spending USDC
+
+## CLI Reference
+
+```
+python run_autonomous.py [OPTIONS]
+
+Options:
+  --interval N      Seconds between cycles (default: 1800 = 30min)
+  --once            Run a single cycle and exit
+  --query TEXT      Specific query for single-cycle mode
+  --image           Generate AI visualization (adds cost)
+  --wallet ADDRESS  Solana wallet for SAP registration
+  --image-every N   Generate image every N cycles (default: 3)
 ```
 
 ## Tech Stack
 
-- **Runtime**: Node.js ≥ 18, TypeScript ≥ 5.0
-- **SDK**: `@oobe-protocol-labs/synapse-client-sdk` v2.0.6
-- **SAP**: `@synapse-sap/sdk`
-- **Blockchain**: Solana mainnet via Anchor v0.30
+- **Runtime**: Python ≥ 3.10
+- **Blockchain**: Solana via x402 + Synapse RPC
+- **Services**: Ace Data Cloud (Search, Chat, Images)
 
 ## License
 
 MIT — Atlas Nexus (AtlasNexusOps)
 
-## Live Site
+## Built by
 
-🔗 **[atlasnexusops.github.io/oobe-ace-agent](https://atlasnexusops.github.io/oobe-ace-agent/)** — Architecture, workflow, compliance, demo.
+🔮 **Atlas Nexus** — autonomous agent infrastructure
+Powered by OOBE Protocol Synapse × Ace Data Cloud × x402 × Solana
