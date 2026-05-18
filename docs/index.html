@@ -1,257 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atlas Nexus — Autonomous Data Intelligence Agent | OOBE × Ace Data Cloud</title>
-<meta name="description" content="TypeScript autonomous agent. Synapse Agent Protocol, 3 Ace Data Cloud services, x402 payments on Solana.">
-<style>
-  :root {
-    --bg: #0a0a0f; --surface: #111118; --card: #16161f; --border: #222232;
-    --text: #e8e8f0; --muted: #8888a0;
-    --purple: #8b5cf6; --cyan: #06b6d4; --green: #10b981; --orange: #f59e0b;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-  }
-  section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-
-  .hero-gradient {
-    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(139,92,246,0.15) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(6,182,212,0.1) 0%, transparent 70%);
-  }
-  .glass {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 20px 24px;
-  }
-  .glass:hover { border-color: var(--purple); transition: border-color 0.3s; }
-  .gradient-text {
-    background: linear-gradient(135deg, var(--purple), var(--cyan));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
-    background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green);
-  }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 24px; border-radius: 12px; font-weight: 600;
-    text-decoration: none; cursor: pointer; transition: all 0.2s;
-  }
-  .btn-primary { background: var(--purple); color: white; box-shadow: 0 0 20px rgba(139,92,246,0.25); }
-  .btn-primary:hover { background: #7c3aed; }
-  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--purple); }
-  .check { color: var(--green); font-weight: bold; font-size: 1.3rem; }
-  pre.code-block {
-    background: #0d0d14; border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px 24px; overflow-x: auto; font-family: 'SF Mono', monospace;
-    font-size: 13px; line-height: 1.6; color: #c9d1d9; max-width: 700px; margin: 0 auto;
-  }
-  .code-block .kw { color: #ff79c6; } .code-block .str { color: #a5d6ff; }
-  .code-block .fn { color: #50fa7b; } .code-block .cmt { color: #6272a4; }
-  .step-num { font-size: 2.5rem; font-weight: 900; color: var(--purple); line-height: 1; min-width: 40px; }
-  h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1.05; }
-  h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 12px; }
-
-  @media (max-width: 768px) { section { padding: 48px 16px; } }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title>OOBE × Ace Agent — Atlas Nexus</title>
+  <link rel="canonical" href="https://atlasnexus.tech/oobe-ace-agent/">
+  <meta name="description" content="Présentation Atlas Nexus de l’agent autonome OOBE × Ace Data Cloud : SAP, x402guard, Solana, AceDataCloud et Seedance 2.0.">
+  <meta property="og:title" content="OOBE × Ace Agent — Atlas Nexus">
+  <meta property="og:description" content="Agent autonome multi-service publié sur Synapse Agent Protocol et connecté à x402guard pour les garde-fous de dépense on-chain.">
+  <meta property="og:url" content="https://atlasnexus.tech/oobe-ace-agent/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { display: ['Rubik','sans-serif'], body: ['Nunito Sans','sans-serif'] }, colors: { primary:'#2563EB','primary-dark':'#1D4ED8', secondary:'#3B82F6', accent:'#059669','accent-dark':'#047857', surface:'#F8FAFC', muted:'#F1F5FD', border:'#E4ECFC', foreground:'#0F172A','dark-surface':'#0B1120','dark-card':'#111827','dark-elevated':'#1A2235','dark-border':'#1E293B','dark-foreground':'#F1F5F9','dark-dim':'#94A3B8' } } }
+    }
+  </script>
+  <style>
+    body{font-family:'Nunito Sans',sans-serif} .font-display{font-family:'Rubik',sans-serif}
+    .hero-title{font-size:clamp(2.55rem,6.8vw,5.6rem);font-weight:900;letter-spacing:-.06em;line-height:1.02;overflow:visible}
+    .glow-word{position:relative;display:inline-block;overflow:visible;padding:.035em .02em .13em;background:linear-gradient(110deg,#0F172A 0%,#2563EB 30%,#7C3AED 56%,#059669 84%,#0F172A 100%);background-size:240% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:agenticGlow 3.8s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(37,99,235,.22))}
+    .glow-word::after{content:"";position:absolute;left:2%;right:2%;bottom:.09em;height:.14em;border-radius:999px;background:linear-gradient(90deg,rgba(37,99,235,0),rgba(37,99,235,.42),rgba(5,150,105,.34),rgba(37,99,235,0));filter:blur(5px);z-index:-1}
+    @keyframes agenticGlow{0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 10px rgba(37,99,235,.16))}50%{background-position:100% 50%;filter:drop-shadow(0 0 24px rgba(5,150,105,.26))}}
+    .card-hover{transition:all 250ms ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 45px -20px rgba(37,99,235,.28);border-color:#2563EB}.section-title{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+    .atlas-card{position:relative;overflow:hidden;border-color:rgba(37,99,235,.22)!important;box-shadow:0 18px 52px -34px rgba(37,99,235,.55);background:linear-gradient(145deg,#fff 0%,#f7fbff 52%,#eef8ff 100%)}.atlas-card::before{content:"";position:absolute;inset:-1px;pointer-events:none;background:radial-gradient(circle at 15% 0%,rgba(37,99,235,.12),transparent 38%),radial-gradient(circle at 95% 20%,rgba(5,150,105,.10),transparent 34%)}.atlas-card>*{position:relative}.dark .atlas-card{background:linear-gradient(145deg,#111827 0%,#111d30 52%,#0e1f2d 100%);border-color:rgba(59,130,246,.25)!important;box-shadow:0 18px 52px -34px rgba(0,0,0,.6)}
+    .code-card{background:#0b1120;color:#dbeafe;border:1px solid rgba(59,130,246,.24);box-shadow:0 22px 60px -36px rgba(5,150,105,.5)}.flow-line{background:linear-gradient(90deg,#2563EB,#059669)}
+    .dark .bg-white,.dark .bg-surface{background-color:#0B1120}.dark .text-slate-600{color:#CBD5E1}.dark .text-slate-500{color:#94A3B8}.dark .border-border{border-color:#1E293B}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
 </head>
-<body>
-
-<section class="hero-gradient" style="min-height: 90vh; display: flex; align-items: center;">
-  <div>
-    <div class="badge" style="margin-bottom: 20px;"><span class="dot"></span> Bounty Submission — $2,400 USDC</div>
-    <h1 style="margin-bottom: 16px;">Autonomous<br><span class="gradient-text">Data Intelligence</span><br>Agent</h1>
-    <p style="font-size: 1.15rem; color: var(--muted); margin-bottom: 32px; max-width: 560px;">
-      TypeScript agent on OOBE Synapse Agent Protocol.<br>
-      Discovers tools, executes workflows across 3 Ace Data Cloud services,<br>
-      pays via x402 (Solana USDC).
-    </p>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="btn btn-primary" target="_blank">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
+<body class="bg-white dark:bg-dark-surface text-foreground dark:text-dark-foreground antialiased">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl border-b border-border dark:border-dark-border">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-display font-bold text-lg" aria-label="Atlas Nexus accueil">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="text-primary"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 1 0 9.8 9.8Z" fill="currentColor"/></svg>
+        Atlas Nexus
       </a>
-      <a href="#architecture" class="btn btn-outline">Architecture →</a>
-      <a href="#workflow" class="btn btn-outline">Workflow →</a>
-    </div>
-  </div>
-</section>
-
-<section id="stack">
-  <div class="glass" style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
-    <div style="text-align: center;">
-      <div style="font-size: 1.8rem; font-weight: 700; color: var(--purple);">TypeScript</div>
-      <div style="font-size: 13px; color: var(--muted);">Node.js ≥ 18</div>
-    </div>
-    <div style="text-align: center;">
-      <div style="font-size: 1.8rem; font-weight: 700; color: var(--cyan);">@oobe-protocol-labs</div>
-      <div style="font-size: 13px; color: var(--muted);">Synapse Client SDK v2.0.6</div>
-    </div>
-    <div style="text-align: center;">
-      <div style="font-size: 1.8rem; font-weight: 700; color: var(--green);">x402</div>
-      <div style="font-size: 13px; color: var(--muted);">Solana USDC Payments</div>
-    </div>
-    <div style="text-align: center;">
-      <div style="font-size: 1.8rem; font-weight: 700; color: var(--orange);">3</div>
-      <div style="font-size: 13px; color: var(--muted);">Ace Data Cloud Services</div>
-    </div>
-  </div>
-</section>
-
-<section id="architecture">
-  <h2><span class="gradient-text">Architecture</span></h2>
-  <p style="color: var(--muted); margin-bottom: 40px;">Clean modular design. Each component single responsibility. Full Synapse Client SDK stack.</p>
-
-  <div style="display: grid; gap: 12px; max-width: 800px;">
-    <div class="glass" style="display: grid; grid-template-columns: 200px 1fr; align-items: start;">
-      <div style="font-weight: 700; color: var(--purple);">sap.ts</div>
-      <div>Synapse Agent Protocol integration. Agent PDA derivation, facilitator discovery, x402 payment flow. Uses built-in SAP module.</div>
-    </div>
-    <div class="glass" style="display: grid; grid-template-columns: 200px 1fr; align-items: start;">
-      <div style="font-weight: 700; color: var(--cyan);">ace-bridge.ts</div>
-      <div>Ace Data Cloud via Synapse MCP client bridge. 3 service wrappers: Search, Chat, Images. Graceful fallback to demo mode.</div>
-    </div>
-    <div class="glass" style="display: grid; grid-template-columns: 200px 1fr; align-items: start;">
-      <div style="font-weight: 700; color: var(--green);">workflow.ts</div>
-      <div>Autonomous workflow engine. Orchestrates Search → Analyze → Visualize → Report. Full audit trail per run.</div>
-    </div>
-    <div class="glass" style="display: grid; grid-template-columns: 200px 1fr; align-items: start;">
-      <div style="font-weight: 700; color: var(--orange);">agent.ts</div>
-      <div>Main orchestrator + CLI. Manages full lifecycle: SAP init → facilitator discovery → MCP connect → execute → compliance report.</div>
-    </div>
-  </div>
-</section>
-
-<section id="workflow">
-  <h2><span class="gradient-text">Autonomous Workflow</span></h2>
-  <p style="color: var(--muted); margin-bottom: 40px;">Zero manual steps. Query → Report.</p>
-
-  <div style="display: flex; flex-direction: column; gap: 0; max-width: 700px; margin: 0 auto;">
-    <div style="display: flex; gap: 16px; align-items: flex-start;">
-      <span class="step-num">1</span>
-      <div class="glass" style="flex: 1;">
-        <div style="font-weight: 700;">SAP Initialization</div>
-        <div style="font-size: 14px; color: var(--muted);">Agent PDA derived. Wallet checked for on-chain registration.</div>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#architecture" class="hover:text-primary">Architecture</a><a href="#tools" class="hover:text-primary">Tools</a><a href="#guardrails" class="hover:text-primary">x402guard</a><a href="#proof" class="hover:text-primary">Proof</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="hidden sm:inline-flex text-sm font-semibold text-primary hover:text-primary-dark">GitHub</a>
+        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-muted dark:hover:bg-dark-elevated" aria-label="Toggle dark mode"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
       </div>
     </div>
-    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+  </nav>
 
-    <div style="display: flex; gap: 16px; align-items: flex-start;">
-      <span class="step-num">2</span>
-      <div class="glass" style="flex: 1;">
-        <div style="font-weight: 700;">x402 Facilitator Discovery</div>
-        <div style="font-size: 14px; color: var(--muted);">6+ facilitators found on Solana. 3 gas-sponsored.</div>
+  <main class="pt-16">
+    <section class="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-white via-blue-50/50 to-emerald-50/40 dark:from-dark-surface dark:via-dark-card dark:to-dark-elevated">
+      <div class="absolute -right-24 top-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="absolute -left-24 bottom-10 w-96 h-96 rounded-full bg-accent/10 blur-3xl"></div>
+      <div class="max-w-7xl mx-auto px-6 relative grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center">
+        <div class="reveal visible">
+          <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-display font-bold text-sm mb-6">🔮 OOBE × Ace Data Cloud · Autonomous Agent Bounty</p>
+          <h1 class="hero-title font-display mb-6">Agent autonome <span class="glow-word">SAP + x402</span> pour data intelligence.</h1>
+          <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mb-8">AtlasNexusScout publie 8 tools sur Synapse Agent Protocol, connecte AceDataCloud et Seedance 2.0, puis encadre les dépenses API via x402guard sur Solana.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark shadow-lg shadow-blue-500/20">Voir le repo GitHub</a>
+            <a href="#architecture" class="px-6 py-3 rounded-xl bg-white dark:bg-dark-card border border-border dark:border-dark-border font-bold hover:border-primary">Lire l’architecture</a>
+          </div>
+        </div>
+        <div class="atlas-card rounded-3xl p-6 md:p-8 border">
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="text-3xl font-display font-black text-primary">8</p><p class="text-sm text-slate-600 dark:text-slate-300 font-semibold">tools publiés SAP</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="text-3xl font-display font-black text-accent">0.1 SOL</p><p class="text-sm text-slate-600 dark:text-slate-300 font-semibold">stake agent</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="text-3xl font-display font-black text-primary">2 USDC</p><p class="text-sm text-slate-600 dark:text-slate-300 font-semibold">daily cap vault</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="text-3xl font-display font-black text-accent">4</p><p class="text-sm text-slate-600 dark:text-slate-300 font-semibold">tools MCP guard</p></div>
+          </div>
+          <div class="code-card rounded-2xl p-5 font-mono text-sm leading-relaxed overflow-x-auto"><span class="text-emerald-300">AtlasNexusScout</span><br>├─ SAP mainnet agent PDA<br>├─ AceDataCloud: search · chat · images<br>├─ Seedance 2.0: t2v · i2v · character · omni · edit<br>└─ x402guard: balance · history · spend · pay_for_api</div>
+        </div>
       </div>
-    </div>
-    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+    </section>
 
-    <div style="display: flex; gap: 16px; align-items: flex-start;">
-      <span class="step-num">3</span>
-      <div class="glass" style="flex: 1;">
-        <div style="font-weight: 700;">Service #1: Search</div>
-        <div style="font-size: 14px; color: var(--muted);">Ace Data Cloud Search via MCP bridge. ~$0.001 USDC.</div>
+    <section id="architecture" class="py-20 bg-white dark:bg-dark-surface">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12 reveal"><p class="text-primary font-display font-bold uppercase tracking-wide text-sm mb-3">Architecture</p><h2 class="section-title font-display">Un agent, deux couches de confiance.</h2><p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-3xl">La démo sépare l’identité/capacité agentique côté SAP et la dépense contrôlée côté x402guard.</p></div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="card-hover rounded-2xl p-7 border border-border dark:border-dark-border bg-surface dark:bg-dark-card"><div class="text-3xl mb-4">🧠</div><h3 class="font-display font-bold text-xl mb-3">Agent SAP</h3><p class="text-slate-600 dark:text-slate-300 leading-relaxed">Agent enregistré sur Synapse Agent Protocol avec PDA on-chain, stake et catalogue de tools.</p></article>
+          <article class="card-hover rounded-2xl p-7 border border-border dark:border-dark-border bg-surface dark:bg-dark-card"><div class="text-3xl mb-4">🌐</div><h3 class="font-display font-bold text-xl mb-3">Ace + Seedance</h3><p class="text-slate-600 dark:text-slate-300 leading-relaxed">Recherche web structurée, analyse chat, génération image et pipelines vidéo Seedance 2.0.</p></article>
+          <article class="card-hover rounded-2xl p-7 border border-border dark:border-dark-border bg-surface dark:bg-dark-card"><div class="text-3xl mb-4">🛡️</div><h3 class="font-display font-bold text-xl mb-3">x402guard</h3><p class="text-slate-600 dark:text-slate-300 leading-relaxed">Vault Solana devnet, caps USDC, allowlist endpoint et enforcement avant chaque dépense API.</p></article>
+        </div>
       </div>
-    </div>
-    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+    </section>
 
-    <div style="display: flex; gap: 16px; align-items: flex-start;">
-      <span class="step-num">4</span>
-      <div class="glass" style="flex: 1;">
-        <div style="font-weight: 700;">Service #2: Chat</div>
-        <div style="font-size: 14px; color: var(--muted);">AI analysis via Ace Data Cloud Chat. ~$0.002 USDC.</div>
+    <section id="tools" class="py-20 bg-surface dark:bg-dark-elevated">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-start">
+        <div class="reveal"><p class="text-primary font-display font-bold uppercase tracking-wide text-sm mb-3">Published tools</p><h2 class="section-title font-display mb-5">8 capacités exposées pour un agent autonome.</h2><p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">Le repo documente les scripts de publication, vérification agent PDA et workflow autonome. Cette page sert de présentation lisible pour visiteurs et bounty reviewers.</p></div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-2xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-5"><p class="font-display font-bold text-lg mb-2">AceDataCloud</p><ul class="text-slate-600 dark:text-slate-300 space-y-2 text-sm"><li>• search structuré</li><li>• chat analytique GPT-4o-mini</li><li>• génération images</li></ul></div>
+          <div class="rounded-2xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-5"><p class="font-display font-bold text-lg mb-2">Seedance 2.0</p><ul class="text-slate-600 dark:text-slate-300 space-y-2 text-sm"><li>• text-to-video</li><li>• image-to-video</li><li>• character / omni / edit</li></ul></div>
+        </div>
       </div>
-    </div>
-    <div style="margin-left: 28px; padding: 4px 0 4px 20px; border-left: 2px solid var(--border); height: 24px;"></div>
+    </section>
 
-    <div style="display: flex; gap: 16px; align-items: flex-start;">
-      <span class="step-num">5</span>
-      <div class="glass" style="flex: 1;">
-        <div style="font-weight: 700;">Intelligence Report</div>
-        <div style="font-size: 14px; color: var(--muted);">Markdown brief with AI analysis + full audit trail + payment reconciliation.</div>
+    <section id="guardrails" class="py-20 bg-white dark:bg-dark-surface">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="atlas-card rounded-3xl border p-8 md:p-10 grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
+          <div><p class="text-accent font-display font-bold uppercase tracking-wide text-sm mb-3">x402 spending guardrails</p><h2 class="section-title font-display mb-5">Paiement API contrôlé avant exécution.</h2><p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">x402guard impose un plafond par appel, un plafond quotidien et une allowlist d’endpoint. L’agent peut acheter des capacités API sans transformer son wallet en surface de risque ouverte.</p></div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="font-display font-black text-2xl text-accent">0.5 USDC</p><p class="text-sm text-slate-600 dark:text-slate-300">per-call cap</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="font-display font-black text-2xl text-accent">api.acedata.cloud</p><p class="text-sm text-slate-600 dark:text-slate-300">endpoint allowlist</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="font-display font-black text-2xl text-primary">Solana</p><p class="text-sm text-slate-600 dark:text-slate-300">on-chain policy</p></div>
+            <div class="rounded-2xl bg-white/80 dark:bg-dark-card/80 border border-border dark:border-dark-border p-5"><p class="font-display font-black text-2xl text-primary">MCP</p><p class="text-sm text-slate-600 dark:text-slate-300">balance · history · spend · pay</p></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="demo">
-  <h2><span class="gradient-text">Live Demo</span></h2>
-  <p style="color: var(--muted); margin-bottom: 32px;">Build, run, deploy in seconds.</p>
+    <section id="proof" class="py-20 bg-surface dark:bg-dark-elevated">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8">
+        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-primary font-display font-bold uppercase tracking-wide text-sm mb-3">Repo proof</p><h2 class="font-display font-extrabold text-3xl mb-4">Scripts et limites documentés.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Le README liste les outils SAP, l’intégration x402guard, les scripts disponibles et les limites connues du flux pricing_menu / top-up devnet.</p><a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="inline-flex px-5 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark">Ouvrir GitHub →</a></div>
+        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-accent font-display font-bold uppercase tracking-wide text-sm mb-3">AtlasNexus position</p><h2 class="font-display font-extrabold text-3xl mb-4">Une preuve d’infra agentique.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Cette présentation remplace le lien brut x402 par une page claire, alignée avec le thème AtlasNexus, pour montrer le rôle de l’agent dans l’écosystème.</p><a href="/" class="inline-flex px-5 py-3 rounded-xl border border-border dark:border-dark-border font-bold hover:border-primary">Retour Atlas Nexus →</a></div>
+      </div>
+    </section>
+  </main>
 
-  <pre class="code-block">
-<span class="cmt"># Install & build</span>
-<span class="kw">git clone</span> https://github.com/AtlasNexusOps/oobe-ace-agent.git
-<span class="kw">cd</span> oobe-ace-agent && npm install && npm run build
-
-<span class="cmt"># Configure</span>
-<span class="kw">cp</span> .env.example .env  <span class="cmt"># Add OOBE_API_KEY + SOLANA key</span>
-
-<span class="cmt"># Run intelligence</span>
-npm start <span class="str">"Bitcoin ETF flows analysis"</span>
-
-<span class="cmt"># Or full demo</span>
-npm run demo</pre>
-
-  <div style="display: flex; gap: 12px; margin-top: 24px;">
-    <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="btn btn-primary" target="_blank">View on GitHub</a>
-    <a href="https://github.com/AtlasNexusOps/oobe-ace-agent/blob/main/README.md" class="btn btn-outline" target="_blank">README →</a>
-  </div>
-</section>
-
-<section id="compliance">
-  <h2><span class="gradient-text">Bounty Compliance</span></h2>
-  <p style="color: var(--muted); margin-bottom: 40px;">All requirements met. Ready for submission.</p>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">Agent on SAP</div>
-      <div style="font-size: 13px; color: var(--muted);">SynapseAnchorSap.create() — PDA derived, ready for on-chain registration</div>
-    </div>
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">Automated Workflow</div>
-      <div style="font-size: 13px; color: var(--muted);">Search → Analyze → Report. Zero manual steps.</div>
-    </div>
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">Ace Data Cloud Account</div>
-      <div style="font-size: 13px; color: var(--muted);">Auto-created via x402 payment flow</div>
-    </div>
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">x402 + Synapse RPC</div>
-      <div style="font-size: 13px; color: var(--muted);">6 facilitators on Solana, 3 gas-sponsored</div>
-    </div>
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">3 Distinct Services</div>
-      <div style="font-size: 13px; color: var(--muted);">Search · Chat · Images — all via MCP bridge</div>
-    </div>
-    <div class="glass">
-      <div class="check">✅</div>
-      <div style="font-weight: 700;">GitHub Repository</div>
-      <div style="font-size: 13px; color: var(--muted);">AtlasNexusOps/oobe-ace-agent</div>
-    </div>
-  </div>
-</section>
-
-<footer style="border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--muted); font-size: 14px;">
-  <p>Atlas Nexus — Autonomous Data Intelligence Agent</p>
-  <p style="margin-top: 4px;">Built for OOBE × Ace Data Cloud Autonomous Agent Bounty ($2,400 USDC)</p>
-  <p style="margin-top: 16px; font-size: 12px;">
-    <a href="https://github.com/AtlasNexusOps" style="color: var(--purple);">GitHub</a>
-    &nbsp;·&nbsp;
-    <a href="https://atlasnexusops.github.io" style="color: var(--cyan);">Portfolio</a>
-  </p>
-</footer>
-
+  <footer class="py-10 border-t border-border dark:border-dark-border bg-white dark:bg-dark-surface"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-sm text-slate-500"><p>Atlas Nexus · OOBE × Ace Agent presentation</p><p>OOBE Protocol · Ace Data Cloud · Seedance 2.0 · x402guard · Solana</p></div></footer>
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    document.getElementById('theme-toggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light')});
+    const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
