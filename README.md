@@ -2,128 +2,129 @@
 
 **Built for the OOBE × Ace Data Cloud Autonomous Agent Bounty ($2,400 USDC)**
 
-Autonomous agent that discovers tools through **Synapse Agent Protocol**,
-executes intelligence workflows across **3 Ace Data Cloud services**,
-and pays via **x402** (Solana USDC micropayments).
+Multi-service autonomous agent registered on **Synapse Agent Protocol (SAP)** and connected to **x402guard** for on-chain spending guardrails.
 
-## Live Site
+## Live
 
-🔗 **[atlasnexusops.github.io/oobe-ace-agent](https://atlasnexusops.github.io/oobe-ace-agent/)** — Architecture, workflow, compliance, demo.
+🔗 **[atlasnexus.tech](https://atlasnexus.tech)** — Atlas Nexus ecosystem
+🔗 **[atlasnexusops.github.io/oobe-ace-agent](https://atlasnexusops.github.io/oobe-ace-agent/)** — Architecture & compliance
 
 ---
-
-## Quick Start
-
-```bash
-# Clone
-git clone https://github.com/AtlasNexusOps/oobe-ace-agent.git
-cd oobe-ace-agent
-
-# Setup
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Configure
-cp .env.example .env
-# Edit .env — fill in SOLANA_PRIVATE_KEY_BASE58
-
-# Run (single query)
-python run_autonomous.py --once --query "Solana DeFi trends"
-
-# Run (autonomous continuous mode — 30min cycles)
-python run_autonomous.py
-
-# Run (autonomous + images every 3 cycles)
-python run_autonomous.py --image-every 3
-```
-
-## Modes
-
-### Single Cycle (`--once`)
-```bash
-python run_autonomous.py --once --query "Bitcoin whale accumulation"
-python run_autonomous.py --once --image  # with AI visualization
-```
-
-### Continuous Autonomous (`default`)
-```bash
-python run_autonomous.py                    # 30min interval
-python run_autonomous.py --interval 900     # 15min interval
-python run_autonomous.py --image-every 1    # image every cycle
-```
-
-Press `Ctrl+C` for graceful shutdown — saves state to `examples/agent_state.json`.
 
 ## What It Does
 
 ```
-┌─ Cycle every N minutes ─────────────────────────────┐
+┌─ AtlasNexusScout ────────────────────────────────────┐
 │                                                       │
-│  1. Select intelligence query (14-topic crypto pool)  │
-│  2. Discover tools via SAP                            │
-│  3. Search → Ace Data Cloud Search  [$0.001 USDC]     │
-│  4. Analyze → Ace Data Cloud Chat   [$0.002 USDC]     │
-│  5. Visualize → Ace Data Cloud Images (every 3rd)     │
-│  6. Log activity on SAP (on-chain audit)              │
-│  7. Generate Markdown intelligence brief              │
+│  SAP Agent Protocol (Solana mainnet)                  │
+│  ├── 8 tools published on-chain                       │
+│  │   ├── AceDataCloud: search, chat, images           │
+│  │   └── Seedance 2.0: t2v, i2v, character, omni, edit│
+│  ├── 0.1 SOL staked                                   │
+│  └── Status: active                                   │
+│                                                       │
+│  x402guard (Solana devnet)                            │
+│  ├── Vault: Nexus Scout                               │
+│  ├── Daily cap: 2 USDC                                │
+│  ├── Per-call cap: 0.5 USDC                           │
+│  ├── Allowlist: api.acedata.cloud                     │
+│  └── MCP tools: balance, history, spend, pay_for_api  │
 │                                                       │
 └───────────────────────────────────────────────────────┘
 ```
 
+## Quick Start
+
+```bash
+git clone https://github.com/AtlasNexusOps/oobe-ace-agent.git
+cd oobe-ace-agent
+
+# Install
+npm install
+
+# Configure
+cp .env.example .env
+# Fill in: OOBE_API_KEY, SOLANA_PRIVATE_KEY_BASE58, ACE_API_KEY
+
+# Run autonomous cycle
+npx tsx src/autonomous_workflow.ts
+```
+
+## SAP Tools Published
+
+### AceDataCloud (3 tools)
+| Tool | Category | Description |
+|------|----------|-------------|
+| `acedatacloud-search` | Data | Web search with structured results |
+| `acedatacloud-chat` | Analytics | GPT-4o-mini intelligence analysis |
+| `acedatacloud-images` | Custom | AI image generation |
+
+### Seedance 2.0 (5 tools)
+| Tool | Category | Description |
+|------|----------|-------------|
+| `seedance-t2v` | Custom | Text-to-video generation |
+| `seedance-i2v` | Custom | Image-to-video generation |
+| `seedance-character` | Custom | 4K character sheet creation |
+| `seedance-omni` | Custom | Multi-reference video generation |
+| `seedance-edit` | Custom | AI video editing |
+
+All tools published on SAP mainnet (`SAPpUhsWLJG1FfkGRcXagEDMrMsWGjbky7AyhGpFETZ`), agent PDA `FHTLFvsLijuvknHJSKwjfLGXFCV8a2X1cvMHJUEuTeer`.
+
+## x402guard Integration
+
+x402guard provides Solana-native spending guardrails for AI agents. The vault enforces:
+- **Per-call cap** — maximum USDC per API call
+- **Daily cap** — maximum USDC per day
+- **Endpoint allowlist** — only approved API hosts
+- **On-chain enforcement** — every `spend` validated by the Solana program
+
+Connect via MCP:
+```json
+{
+  "mcpServers": {
+    "x402guard": {
+      "url": "https://x402guard.acedata.cloud/mcp/YOUR_VAULT_TOKEN"
+    }
+  }
+}
+```
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `publish-tools.ts` | Publish AceDataCloud tools to SAP |
+| `publish-seedance.ts` | Publish Seedance 2.0 tools to SAP |
+| `migrate-scout-v2.ts` | Register fresh agent with new wallet |
+| `init-pricing-menu.ts` | Initialize pricing_menu PDA (requires SAP v2) |
+| `check-agent.ts` | Verify agent PDA on-chain |
+| `find-agent.ts` | Discover agent PDA from stake receipt |
+
 ## Architecture
 
 ```
-AtlasNexusScout (autonomous orchestrator)
-├── SAP Client          → Agent registration, tool discovery, activity log
-├── Ace Services        → Search, Chat, Images (3 distinct services)
-├── x402 Handler        → Solana USDC micropayments (graceful dry-run)
-├── Intelligence Engine → Workflow: Search → Analyze → Visualize
-├── Report Generator    → Markdown briefs + full audit trail
-└── Query Pool          → 14 crypto topics, cooldown-aware selection
+AtlasNexusScout
+├── SAP (Synapse Agent Protocol)
+│   ├── Agent identity (on-chain PDA)
+│   ├── 8 published x402 tools
+│   └── Stake: 0.1 SOL
+├── x402guard (Spending Guardrails)
+│   ├── Vault with USDC caps
+│   ├── MCP integration (4 tools)
+│   └── On-chain policy enforcement
+├── Ace Services
+│   ├── Search, Chat, Images
+│   └── x402 micropayments
+└── Seedance 2.0
+    ├── Text-to-Video, Image-to-Video
+    ├── Character consistency
+    └── Omni-reference, Video editing
 ```
 
-See [docs/architecture.md](docs/architecture.md) for full design.
+## Known Issues
 
-## Bounty Compliance
-
-| Requirement | Status |
-|---|---|
-| Agent registered on SAP | ✅ |
-| Complete automated workflow | ✅ |
-| Ace Data Cloud account | ✅ (x402 auto) |
-| x402 + Synapse RPC | ✅ |
-| 3+ distinct services | ✅ Search, Chat, Images |
-| GitHub repo | ✅ |
-| Demo on X | ⬜ Pending |
-| **Autonomous continuous execution** | ✅ `run_autonomous.py` |
-
-## Dry-Run Mode
-
-If `SOLANA_PRIVATE_KEY_BASE58` is not set, the agent runs in **dry-run mode**:
-- SAP tool discovery uses fallback service list
-- x402 payments are skipped
-- Cycle logging still works
-- Perfect for testing the workflow without spending USDC
-
-## CLI Reference
-
-```
-python run_autonomous.py [OPTIONS]
-
-Options:
-  --interval N      Seconds between cycles (default: 1800 = 30min)
-  --once            Run a single cycle and exit
-  --query TEXT      Specific query for single-cycle mode
-  --image           Generate AI visualization (adds cost)
-  --wallet ADDRESS  Solana wallet for SAP registration
-  --image-every N   Generate image every N cycles (default: 3)
-```
-
-## Tech Stack
-
-- **Runtime**: Python ≥ 3.10
-- **Blockchain**: Solana via x402 + Synapse RPC
-- **Services**: Ace Data Cloud (Search, Chat, Images)
+- **SAP pricing_menu**: On-chain v0.10 program requires `pricing_menu` PDA for escrow v2, but no instruction creates it for pre-existing agents. Fixed in SAP v2 (not yet deployed). Workaround: wait for v2 or contact OOBE.
+- **x402guard top-up**: USDC devnet top-up flow may require sending directly to vault PDA (not wallet address). Vault PDA: `61WT4bPiN4b6d7SrKXPQPThpcP4q2e16ZYk27Pxwsqod`.
 
 ## License
 
@@ -132,4 +133,4 @@ MIT — Atlas Nexus (AtlasNexusOps)
 ## Built by
 
 🔮 **Atlas Nexus** — autonomous agent infrastructure
-Powered by OOBE Protocol Synapse × Ace Data Cloud × x402 × Solana
+Powered by OOBE Protocol × Ace Data Cloud × Seedance 2.0 × x402guard × Solana
