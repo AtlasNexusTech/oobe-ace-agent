@@ -23,9 +23,9 @@
   <style>
     body{font-family:'Nunito Sans',sans-serif} .font-display{font-family:'Rubik',sans-serif}
     .hero-title{font-size:clamp(2.55rem,6.8vw,5.6rem);font-weight:900;letter-spacing:-.06em;line-height:1.02;overflow:visible}
-    .glow-word{position:relative;display:inline-block;overflow:visible;padding:.035em .02em .13em;background:linear-gradient(110deg,#0F172A 0%,#2563EB 30%,#7C3AED 56%,#059669 84%,#0F172A 100%);background-size:240% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:agenticGlow 3.8s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(37,99,235,.22))}
+    .glow-word{position:relative;display:inline-block;overflow:visible;padding:.035em .02em .13em;background:linear-gradient(110deg,#0F172A 0%,#2563EB 30%,#7C3AED 56%,#059669 84%,#0F172A 100%);background-size:240% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:agenticGlow 3.8s ease-in-out infinite}
     .glow-word::after{content:"";position:absolute;left:2%;right:2%;bottom:.09em;height:.14em;border-radius:999px;background:linear-gradient(90deg,rgba(37,99,235,0),rgba(37,99,235,.42),rgba(5,150,105,.34),rgba(37,99,235,0));filter:blur(5px);z-index:-1}
-    @keyframes agenticGlow{0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 10px rgba(37,99,235,.16))}50%{background-position:100% 50%;filter:drop-shadow(0 0 24px rgba(5,150,105,.26))}}
+    @keyframes agenticGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     .card-hover{transition:all 250ms ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 45px -20px rgba(37,99,235,.28);border-color:#2563EB}.section-title{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}
     .atlas-card{position:relative;overflow:hidden;border-color:rgba(37,99,235,.22)!important;box-shadow:0 18px 52px -34px rgba(37,99,235,.55);background:linear-gradient(145deg,#fff 0%,#f7fbff 52%,#eef8ff 100%)}.atlas-card::before{content:"";position:absolute;inset:-1px;pointer-events:none;background:radial-gradient(circle at 15% 0%,rgba(37,99,235,.12),transparent 38%),radial-gradient(circle at 95% 20%,rgba(5,150,105,.10),transparent 34%)}.atlas-card>*{position:relative}.dark .atlas-card{background:linear-gradient(145deg,#111827 0%,#111d30 52%,#0e1f2d 100%);border-color:rgba(59,130,246,.25)!important;box-shadow:0 18px 52px -34px rgba(0,0,0,.6)}
     .code-card{background:#0b1120;color:#dbeafe;border:1px solid rgba(59,130,246,.24);box-shadow:0 22px 60px -36px rgba(5,150,105,.5)}.flow-line{background:linear-gradient(90deg,#2563EB,#059669)}
@@ -44,7 +44,7 @@
         <a href="#architecture" class="hover:text-primary">Architecture</a><a href="#tools" class="hover:text-primary">Tools</a><a href="#guardrails" class="hover:text-primary">x402guard</a><a href="#proof" class="hover:text-primary">Proof</a>
       </div>
       <div class="flex items-center gap-3">
-        <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="hidden sm:inline-flex text-sm font-semibold text-primary hover:text-primary-dark">GitHub</a>
+        <a href="https://github.com/AtlasNexusTech/oobe-ace-agent" class="hidden sm:inline-flex text-sm font-semibold text-primary hover:text-primary-dark">GitHub</a>
         <button id="theme-toggle" class="p-2 rounded-lg hover:bg-muted dark:hover:bg-dark-elevated" aria-label="Toggle dark mode"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
       </div>
     </div>
@@ -60,7 +60,7 @@
           <h1 class="hero-title font-display mb-6">Agent autonome <span class="glow-word">SAP + x402</span> pour data intelligence.</h1>
           <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mb-8">AtlasNexusScout publie 8 tools sur Synapse Agent Protocol, connecte AceDataCloud et Seedance 2.0, puis encadre les dépenses API via x402guard sur Solana.</p>
           <div class="flex flex-wrap gap-4">
-            <a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark shadow-lg shadow-blue-500/20">Voir le repo GitHub</a>
+            <a href="https://github.com/AtlasNexusTech/oobe-ace-agent" class="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark shadow-lg shadow-blue-500/20">Voir le repo GitHub</a>
             <a href="#architecture" class="px-6 py-3 rounded-xl bg-white dark:bg-dark-card border border-border dark:border-dark-border font-bold hover:border-primary">Lire l’architecture</a>
           </div>
         </div>
@@ -113,8 +113,8 @@
 
     <section id="proof" class="py-20 bg-surface dark:bg-dark-elevated">
       <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8">
-        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-primary font-display font-bold uppercase tracking-wide text-sm mb-3">Repo proof</p><h2 class="font-display font-extrabold text-3xl mb-4">Scripts et limites documentés.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Le README liste les outils SAP, l’intégration x402guard, les scripts disponibles et les limites connues du flux pricing_menu / top-up devnet.</p><a href="https://github.com/AtlasNexusOps/oobe-ace-agent" class="inline-flex px-5 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark">Ouvrir GitHub →</a></div>
-        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-accent font-display font-bold uppercase tracking-wide text-sm mb-3">AtlasNexus position</p><h2 class="font-display font-extrabold text-3xl mb-4">Une preuve d’infra agentique.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Cette présentation remplace le lien brut x402 par une page claire, alignée avec le thème AtlasNexus, pour montrer le rôle de l’agent dans l’écosystème.</p><a href="/" class="inline-flex px-5 py-3 rounded-xl border border-border dark:border-dark-border font-bold hover:border-primary">Retour Atlas Nexus →</a></div>
+        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-primary font-display font-bold uppercase tracking-wide text-sm mb-3">Repo proof</p><h2 class="font-display font-extrabold text-3xl mb-4">Scripts et limites documentés.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Le README liste les outils SAP, l’intégration x402guard, les scripts disponibles et les limites connues du flux pricing_menu / top-up devnet.</p><a href="https://github.com/AtlasNexusTech/oobe-ace-agent" class="inline-flex px-5 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark">Ouvrir GitHub →</a></div>
+        <div class="rounded-3xl bg-white dark:bg-dark-card border border-border dark:border-dark-border p-8"><p class="text-accent font-display font-bold uppercase tracking-wide text-sm mb-3">AtlasNexus position</p><h2 class="font-display font-extrabold text-3xl mb-4">Une preuve d’infra agentique.</h2><p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">Cette démonstration illustre la stack agentique AtlasNexus : un agent autonome enregistré on-chain (SAP), connecté à des clouds de données (AceDataCloud, Seedance 2.0) et encadré par des garde-fous de dépense programmables (x402guard sur Solana).</p><a href="/" class="inline-flex px-5 py-3 rounded-xl border border-border dark:border-dark-border font-bold hover:border-primary">Retour Atlas Nexus →</a></div>
       </div>
     </section>
   </main>
